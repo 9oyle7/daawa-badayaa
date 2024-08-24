@@ -116,29 +116,7 @@
         </h5>
       </div>
       <div class="container">
-        <div class="row row-gap-3 row-bgColor py-4 mx-1">
-          <!-- <div class="justify-content-center" style="background-color: #c9c9c9"> -->
-          <div class="col-6">
-            <a class="btn btn-second fw-bold w-100" id="pashto">بشتو</a>
-          </div>
-          <div class="col-6">
-            <a class="btn btn-second fw-bold w-100">أردو</a>
-          </div>
-          <div class="col-6">
-            <a class="btn btn-second fw-bold w-100">بنقالي</a>
-          </div>
-          <div class="col-6">
-            <a class="btn btn-second fw-bold w-100">انجليزي</a>
-          </div>
-          <div class="col-6">
-            <a class="btn btn-second fw-bold w-100">فلبيني</a>
-          </div>
-          <div class="col-6">
-            <a class="btn btn-second fw-bold w-100">مالي</a>
-          </div>
-
-          <!-- </div> -->
-        </div>
+        <div class="row row-gap-3 row-bgColor py-4 mx-1" id="language"></div>
       </div>
       <div class="position-absolute bottom-0 start-50 translate-middle-x mb-5">
         <a class="btn btn-primary fw-bold" id="home-button-languages">
@@ -199,6 +177,21 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script>
+      let language = ["بشتو", "أردو", "بنقالي", "انجليزي", "فلبيني"];
+      for (let i in language) {
+        document.getElementById("language").innerHTML +=
+          `
+           <div class="col-6">
+            <a  id=` +
+          [i] +
+          ` class="btn btn-second fw-bold w-100" >` +
+          language[i] +
+          `</a>
+          </div>
+        `;
+      }
+    </script>
     <script>
       $(function () {
         $("#start-button").click(function () {
