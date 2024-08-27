@@ -32,25 +32,35 @@
       <div class="container">
         <div class="row">
           <div class="col" v-for="nationality in nationalities">
-            <button
+            <a
               v-on:click="nationalities.name == arabic"
               class="btn btn-outline-dark rounded-0"
             >
               {{ nationality.name }}
-            </button>
+            </a>
           </div>
         </div>
+        <hr />
         <div class="row">
-          <div v-on:click="isMale = !isMale">
-            <p>click app</p>
-          </div>
-
-          <div v-if="isMale">
-            <p>hide me</p>
+          <div class="col" v-for="person in gender">
+            <a
+              v-on:click="person.g == arabic"
+              class="btn btn-outline-dark rounded-0"
+            >
+              {{ person }}
+            </a>
           </div>
         </div>
+        <hr />
         <div class="row">
-          <div v-if="nationalities.name == 'arabic'">ARABIC</div>
+          <div class="col" v-for="human in muslim">
+            <a
+              v-on:click="person.g == arabic"
+              class="btn btn-outline-dark rounded-0"
+            >
+              {{ human.m }}
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -65,8 +75,8 @@
               { name: "english" },
               { name: "aordo" },
             ],
-            isMuslim: true,
-            isMale: true,
+            gender: ["رجل", "مرأة"],
+            muslim: [{ m: "مسلم" }, { m: "غير مسلم" }],
           };
         },
         methods: {},
