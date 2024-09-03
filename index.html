@@ -116,26 +116,11 @@
         </h5>
       </div>
       <div class="container">
-        <div class="row row-gap-3 row-bgColor py-4 mx-1">
+        <div class="row row-gap-3 row-bgColor py-4 mx-1" id="lang">
           <!-- <div class="justify-content-center" style="background-color: #c9c9c9"> -->
-          <div class="col-6">
-            <a class="btn btn-second fw-bold w-100" id="pashto">بشتو</a>
-          </div>
-          <div class="col-6">
-            <a class="btn btn-second fw-bold w-100">أردو</a>
-          </div>
-          <div class="col-6">
-            <a class="btn btn-second fw-bold w-100">بنقالي</a>
-          </div>
-          <div class="col-6">
-            <a class="btn btn-second fw-bold w-100">انجليزي</a>
-          </div>
-          <div class="col-6">
-            <a class="btn btn-second fw-bold w-100">فلبيني</a>
-          </div>
-          <div class="col-6">
-            <a class="btn btn-second fw-bold w-100">مالي</a>
-          </div>
+
+
+        
 
           <!-- </div> -->
         </div>
@@ -221,6 +206,35 @@
           $("#languages").hide();
         });
       });
+    </script>
+
+
+    <script>
+      
+      fetch("data.json")
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.data)
+        for (lang of data.data){
+
+          let content = `
+            <div class="col-6">
+              <a class="btn btn-second fw-bold w-100" onclick="${console.log(1)}" id="${[lang.id]}">${lang.name}</a>
+            </div>
+          `
+          document.getElementById('lang').innerHTML += content;
+        }
+
+
+
+      })
+      const allBtns = document.querySelectorAll('a');
+      allBtns.forEach(bt => {
+        bt.addEventListener('click' , (e) => {
+          console.log(e.target.innerHTML)
+        })
+      })
+    
     </script>
   </body>
 </html>
