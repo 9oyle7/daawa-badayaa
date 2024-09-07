@@ -1,12 +1,29 @@
-{
-    "data": [
-      {
-        "id": 0,
-        "name": "english"
+
+  [
+    {
+      "id": 0,
+      "languageName": "English",
+      "male":[
+        { "muslim": [
+          { "books": ["1 - muslim male book","2 - muslim male book"]}
+        ]
       },
-      {
-        "id": 1,
-        "name": "Urdo"
+        { "notMuslim": 
+        [
+          { "books": ["1 - notMuslim male book","2 - notMuslim male book"]}
+        ]
       }
-    ]
-}
+      ],
+      "female":[
+        { "muslim": [
+          { "books": ["1 - muslim female book","2 - muslim female book"]}
+        ]
+      },
+        { "notMuslim": 
+        [
+          { "books": ["1 - notMuslim female book","2 - notMuslim female book"]}
+        ]
+      }
+      ]
+  }
+  ]
