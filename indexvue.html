@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      html,
+      body {
+        font-family: "Tajawal", sans-serif;
+      }
+      
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+        <h1>{{app_name}}</h1>
+        <div v-for="information in data" :key="information.id">
+            <button @click="fetchLanguage(information.languageName)" >{{information.languageName}}</button>    
+        </div>
+        <hr>
+        <div v-for="information in data" :key="information.id">
+            <button @click="fetchLanguage(information.gender)" >{{information.gender[0]}}</button>    
+        </div>
+        <hr>
+
+  
+    </div>
+    <script>
+    let DB = {
+        "data": [
+        {
+            "id": 0,
+            "languageName": "English",
+            "books": [
+                { "id": 0, "nameBook": "Name Of Book English"},
+                { "id": 1, "nameBook": "Name Of Bookooooooo English"}
+            ],
+            "gender": [
+            {  "id": 0,  "type":"male" },
+            {  "id": 1,  "type":"female" },
+            ],
+            "isMuslim": false
+        },
+        {
+            "id": 1,
+            "languageName": "Urdo",
+            "books": [
+                {  "id": 0,  "nameBook": "Name Of Book Urdo"},
+                {  "id": 1,  "nameBook": "Name Of Bookooooooo Urdo"}
+            ],
+            "gender": [
+            {  "id": 0,  "type":"male" },
+            {  "id": 1,  "type":"female" },
+            ],
+            "isMuslim": true
+        },
+        {
+            "id": 2,
+            "languageName": "Arabic",
+            "books": [
+                {  "id": 0,  "nameBook": "Name Of Book Arabic"},
+                {  "id": 1,  "nameBook": "Name Of Bookooooooo Arabic"}
+            ],
+            "gender": [
+            {  "id": 0,  "type":"male" },
+            {  "id": 1,  "type":"female" },
+            ],
+            "isMuslim": true
+        }
+        ]
+    };
+
+    </script>
+    <script>
+
+const { createApp, ref } = Vue;
+      const app = Vue.createApp({
+
+        data() {
+            return {
+                data: DB.data,
+                app_name: 'جمعية الدعوة',
+            }
+        },
+        methods: {
+            fetchLanguage(e) {
+                console.log(e)
+                
+            },
+            
+                
+        },
+        computed:{
+
+        }
+            
+    })
+      app.mount("#app");
+    </script>
+  </body>
+</html>
