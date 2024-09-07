@@ -23,6 +23,7 @@
       html,
       body {
         font-family: "Tajawal", sans-serif;
+        text-align: center;
       }
       
     </style>
@@ -31,61 +32,60 @@
   <body>
     <div id="app">
         <h1>{{app_name}}</h1>
-        <div v-for="information in data" :key="information.id">
-            <button @click="fetchLanguage(information.languageName)" >{{information.languageName}}</button>    
+        <div>
+            <button v-for="information in data" :key="information.id"
+                          class="btn btn-danger mx-1" @click="fetchLanguage(information.name)" >{{information.name}}
+            </button>   
         </div>
-        <hr>
-        <div v-for="information in data" :key="information.id">
-            <button @click="fetchLanguage(information.gender)" >{{information.gender[0]}}</button>    
-        </div>
-        <hr>
+        
 
-  
+        <hr>
     </div>
     <script>
     let DB = {
-        "data": [
-        {
-            "id": 0,
-            "languageName": "English",
-            "books": [
-                { "id": 0, "nameBook": "Name Of Book English"},
-                { "id": 1, "nameBook": "Name Of Bookooooooo English"}
-            ],
-            "gender": [
-            {  "id": 0,  "type":"male" },
-            {  "id": 1,  "type":"female" },
-            ],
-            "isMuslim": false
-        },
-        {
-            "id": 1,
-            "languageName": "Urdo",
-            "books": [
-                {  "id": 0,  "nameBook": "Name Of Book Urdo"},
-                {  "id": 1,  "nameBook": "Name Of Bookooooooo Urdo"}
-            ],
-            "gender": [
-            {  "id": 0,  "type":"male" },
-            {  "id": 1,  "type":"female" },
-            ],
-            "isMuslim": true
-        },
-        {
-            "id": 2,
-            "languageName": "Arabic",
-            "books": [
-                {  "id": 0,  "nameBook": "Name Of Book Arabic"},
-                {  "id": 1,  "nameBook": "Name Of Bookooooooo Arabic"}
-            ],
-            "gender": [
-            {  "id": 0,  "type":"male" },
-            {  "id": 1,  "type":"female" },
-            ],
-            "isMuslim": true
-        }
-        ]
-    };
+            "languages":[
+                        {
+                        "name":"English",
+                        "gender":[
+                                    {
+                                    "name":"male",
+                                    "books":[
+                                            "Pune",
+                                            "Nagpur",
+                                            "Mumbai"
+                                            ]
+                                    },
+                                    {
+                                    "name":"female",
+                                    "books":[
+                                                "Kochi",
+                                                "Munnar"
+                                            ]
+                                    }
+                                ]
+                        },
+                        {
+                        "name":"Arabic",
+                        "gender":[
+                                    {
+                                    "name":"male",
+                                    "books":[
+                                            "Pune",
+                                            "Nagpur",
+                                            "Mumbai"
+                                            ]
+                                    },
+                                    {
+                                    "name":"female",
+                                    "books":[
+                                                "Kochi",
+                                                "Munnar"
+                                            ]
+                                    }
+                                ]
+                        }
+                    ]
+                }
 
     </script>
     <script>
@@ -95,23 +95,26 @@ const { createApp, ref } = Vue;
 
         data() {
             return {
-                data: DB.data,
-                app_name: 'جمعية الدعوة',
+                data: DB.languages,
+                app_name: 'Saleh APP',
             }
         },
         methods: {
             fetchLanguage(e) {
                 console.log(e)
+                if (e === "English"){
+                    console.log("selected english")
+                }
+                if (e === "Arabic"){
+                    console.log("selected arabic")
+                }
                 
             },
             
                 
         },
-        computed:{
-
-        }
             
-    })
+    });
       app.mount("#app");
     </script>
   </body>
