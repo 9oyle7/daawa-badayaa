@@ -1,29 +1,32 @@
-
-  [
+{
+  "Books": [
     {
-      "id": 0,
-      "languageName": "English",
-      "male":[
-        { "muslim": [
-          { "books": ["1 - muslim male book","2 - muslim male book"]}
-        ]
-      },
-        { "notMuslim": 
-        [
-          { "books": ["1 - notMuslim male book","2 - notMuslim male book"]}
-        ]
-      }
-      ],
-      "female":[
-        { "muslim": [
-          { "books": ["1 - muslim female book","2 - muslim female book"]}
-        ]
-      },
-        { "notMuslim": 
-        [
-          { "books": ["1 - notMuslim female book","2 - notMuslim female book"]}
-        ]
-      }
+      "name": "Book1",
+      "description": "This book talks about number 1",
+      "url": "Link",
+      "tag": [
+        "book",
+        "male",
+        "english",
+        "arabic",
+        "female",
+        "muslim",
+        "non-muslim"
       ]
-  }
+    },
+    {
+      "name": "Book2",
+      "description": "This book talks about number 2",
+      "url": "Link",
+      "tag": [
+        "book",
+        "male",
+        "english",
+        "arabic",
+        "female",
+        "muslim",
+        "non-muslim"
+      ]
+    }
   ]
+}
