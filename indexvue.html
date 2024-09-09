@@ -33,9 +33,10 @@
       <div v-if="page === 'language-selection'">
         <h1>{{app_name}}</h1>
         <div>
+          <h1>choose Language:</h1>
           <!-- <div>{{data}}</div> -->
           <button
-            v-for="information in data"
+            v-for="information in dataLanguages"
             :key="information.id"
             class="btn btn-danger mx-1"
             @click="fetchLanguage(information.name)"
@@ -45,16 +46,46 @@
         </div>
       </div>
 
-      <div v-if="page == 'page2'">
-        <h1>PAGE2</h1>
+<div>
+      <div v-if="page == 'languagePage'">
+        <h1>GENDER page</h1>
         <h1>selected lang: {{selection.language}}</h1>
-      </div>
-      <div v-if="page == 'page3'">
-        <h1>PAGE2</h1>
-        <h1>selected lang: {{selection.language}}</h1>
+
+        <div>
+          <button
+          v-for="information in dataGender"
+          :key="information.id"
+          class="btn btn-danger mx-1"
+          @click="fetchGender(information.name)"
+        >
+          {{information.name}}
+        </button>
+        </div>
       </div>
 
+</div>
+<div v-if="page == 'genderPage'">
+  <h1>RELIAGION page</h1>
+  <h1>selected gender: {{selection.gender}}</h1>
+  <div>
+    <button
+    v-for="information in dataReligion"
+    :key="information.id"
+    class="btn btn-danger mx-1"
+    @click="fetchGender(information.name)"
+  >
+    {{information.name}}
+  </button>
+  </div>
+</div>
       <hr />
+      
+      <div v-if="page !== 'language-selection'">
+
+        <button class="btn btn-primary" @click="homeButton">home</button>
+
+    </div>
+
     </div>
     <script>
       let DB = {
@@ -65,16 +96,21 @@
           {
             name: "Arabic",
           },
-          {
-            name: "rrr",
-          },
         ],
-        gender: [
+        genders: [
           {
             name: "male",
           },
           {
             name: "female",
+          },
+        ],
+        religion: [
+          {
+            name: "muslim",
+          },
+          {
+            name: "non muslim",
           },
         ],
       };
@@ -84,16 +120,22 @@
       const app = Vue.createApp({
         data() {
           return {
-            data: DB.languages,
+            dataLanguages: DB.languages,
+            dataGender: DB.genders,
+            dataReligion: DB.religion,
             app_name: "Saleh APP",
             page: "language-selection",
             selection: {
               language: null,
               gender: null,
+              religion: null,
             },
           };
         },
         methods: {
+          homeButton(page){
+            this.changePageTo("language-selection");
+          },
           changePageTo(page) {
             this.page = page;
           },
@@ -102,12 +144,38 @@
             if (e === "English") {
               // console.log("selected english");
               this.selection.language = "english";
-              this.changePageTo("page2");
+              this.changePageTo("languagePage");
             }
             if (e === "Arabic") {
               // console.log("selected arabic");
               this.selection.language = "arabic";
-              this.changePageTo("page2");
+              this.changePageTo("languagePage");
+            }
+          },
+          fetchGender(e) {
+            // console.log(e);
+            if (e === "male") {
+              console.log("selected male");
+              this.selection.gender = "male";
+              this.changePageTo("genderPage");
+            }
+            if (e === "female") {
+              console.log("selected female");
+              this.selection.gender = "female";
+              this.changePageTo("genderPage");
+            }
+          },
+          fetchReligion(e) {
+            // console.log(e);
+            if (e === "muslim") {
+              console.log("selected muslim");
+              this.selection.religion = "MM";
+              this.changePageTo("religionPage");
+            }
+            if (e === "non muslim") {
+              console.log("selected non muslim");
+              this.selection.religion = "NO";
+              this.changePageTo("religionPage");
             }
           },
         },
