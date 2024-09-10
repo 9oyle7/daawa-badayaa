@@ -32,9 +32,7 @@
     <div id="app">
       <div v-if="page === 'language-selection'">
         <h1>{{app_name}}</h1>
-        <div>
           <h1>choose Language:</h1>
-          <!-- <div>{{data}}</div> -->
           <button
             v-for="information in dataLanguages"
             :key="information.id"
@@ -43,49 +41,51 @@
           >
             {{information.name}}
           </button>
-        </div>
       </div>
-
-<div>
-      <div v-if="page == 'languagePage'">
+      <div v-if="page === 'languagePage'">
         <h1>GENDER page</h1>
         <h1>selected lang: {{selection.language}}</h1>
-
-        <div>
           <button
           v-for="information in dataGender"
           :key="information.id"
           class="btn btn-danger mx-1"
           @click="fetchGender(information.name)"
+           >
+          {{information.name}}
+           </button>
+      </div>
+      <div v-if="page === 'genderPage'">
+        <h1>RELIAGION page</h1>
+        <h1>selected gender: {{selection.gender}}</h1>
+          <button
+          v-for="information in dataReligion"
+          :key="information.id"
+          class="btn btn-danger mx-1"
+          @click="fetchReligion(information.name)"
         >
           {{information.name}}
         </button>
-        </div>
       </div>
-
-</div>
-<div v-if="page == 'genderPage'">
-  <h1>RELIAGION page</h1>
-  <h1>selected gender: {{selection.gender}}</h1>
-  <div>
-    <button
-    v-for="information in dataReligion"
-    :key="information.id"
-    class="btn btn-danger mx-1"
-    @click="fetchGender(information.name)"
-  >
-    {{information.name}}
-  </button>
-  </div>
-</div>
+      <div v-if="page === 'contentPage'">
+        <h1>CONTENT page</h1>
+        <ul>
+          <li>selected lang: {{selection.language}}</li>
+          <li>selected gender: {{selection.gender}}</li>
+          <li>selected religion: {{selection.religion }}</li>
+        </ul>
+          <!-- <button
+          v-for="information in dataReligion"
+          :key="information.id"
+          class="btn btn-danger mx-1"
+          @click="fetchGender(information.name)"
+        >
+          {{information.name}}
+        </button> -->
+      </div>
       <hr />
-      
       <div v-if="page !== 'language-selection'">
-
         <button class="btn btn-primary" @click="homeButton">home</button>
-
-    </div>
-
+      </div>
     </div>
     <script>
       let DB = {
@@ -110,7 +110,7 @@
             name: "muslim",
           },
           {
-            name: "non muslim",
+            name: "non-muslim",
           },
         ],
       };
@@ -169,14 +169,16 @@
             // console.log(e);
             if (e === "muslim") {
               console.log("selected muslim");
-              this.selection.religion = "MM";
-              this.changePageTo("religionPage");
+              this.selection.religion = "muslim";
+              this.changePageTo("contentPage");
             }
-            if (e === "non muslim") {
-              console.log("selected non muslim");
-              this.selection.religion = "NO";
-              this.changePageTo("religionPage");
+            if (e === "non-muslim") {
+              console.log("selected non-muslim");
+              this.selection.religion = "non-muslim";
+              this.changePageTo("contentPage");
             }
+          },
+          displayContent(){
           },
         },
       });

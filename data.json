@@ -28,5 +28,29 @@
         "non-muslim"
       ]
     }
+  ],
+  "Videos": [
+    {
+      "name": "Video1",
+      "description": "Video1",
+      "url": "Link",
+      "tag": [
+        "Video",
+        "english",
+        "female",
+        "non-muslim"
+      ]
+    },
+    {
+      "name": "Video2",
+      "description": "Video2",
+      "url": "Link",
+      "tag": [
+        "Video",
+        "male",
+        "english",
+        "muslim"
+      ]
+    }
   ]
 }
