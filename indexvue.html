@@ -26,38 +26,44 @@
         text-align: center;
       }
     </style>
-    <title>Document</title>
+    <title>جمعية الدعوة</title>
   </head>
   <body>
     <div id="app">
-      <div v-if="page === 'language-selection'">
+      <div v-if="page === 'homePage'">
+        <img :src="logo" alt="logo" />
         <h1>{{app_name}}</h1>
-          <h1>choose Language:</h1>
-          <button
-            v-for="information in dataLanguages"
-            :key="information.id"
-            class="btn btn-danger mx-1"
-            @click="fetchLanguage(information.name)"
-          >
-            {{information.name}}
-          </button>
+        <button @click="goToLanguagePage" class="btn btn-danger mx-1">
+          اضغط هنا
+        </button>
       </div>
       <div v-if="page === 'languagePage'">
+        <h1>choose Language:</h1>
+        <button
+          v-for="information in dataLanguages"
+          :key="information.id"
+          class="btn btn-danger mx-1"
+          @click="fetchLanguage(information.name)"
+        >
+          {{information.name}}
+        </button>
+      </div>
+      <div v-if="page === 'genderPage'">
         <h1>GENDER page</h1>
-        <h1>selected lang: {{selection.language}}</h1>
-          <button
+        <!-- <h1>selected lang: {{selection.language}}</h1> -->
+        <button
           v-for="information in dataGender"
           :key="information.id"
           class="btn btn-danger mx-1"
           @click="fetchGender(information.name)"
-           >
+        >
           {{information.name}}
-           </button>
+        </button>
       </div>
-      <div v-if="page === 'genderPage'">
+      <div v-if="page === 'religionPage'">
         <h1>RELIAGION page</h1>
-        <h1>selected gender: {{selection.gender}}</h1>
-          <button
+        <!-- <h1>selected gender: {{selection.gender}}</h1> -->
+        <button
           v-for="information in dataReligion"
           :key="information.id"
           class="btn btn-danger mx-1"
@@ -74,14 +80,14 @@
           <li>selected religion: {{selection.religion }}</li>
         </ul>
         <button
-        v-for="information in dataContent"
-        :key="information.id"
-        class="btn btn-dark mx-1"
-        @click="fetchContent(information.name)"
-      >
-        {{information.name}}
-      </button>
-          <!-- <button
+          v-for="information in dataContent"
+          :key="information.id"
+          class="btn btn-dark mx-1"
+          @click="fetchContent(information.name)"
+        >
+          {{information.name}}
+        </button>
+        <!-- <button
           v-for="information in dataReligion"
           :key="information.id"
           class="btn btn-danger mx-1"
@@ -92,6 +98,23 @@
       </div>
       <div v-if="page === 'Books'">
         <h1>Books page</h1>
+        <button
+          v-for="information in dataContent"
+          :key="information.id"
+          class="btn btn-dark mx-1"
+          @click="fetchContent(information.name)"
+        >
+          <!-- {{information.name.books}} -->
+        </button>
+        <ul>
+          <li><a href="" class="btn btn-primary">book1</a></li>
+          <li><a href="" class="btn btn-primary">book2</a></li>
+        </ul>
+        <!-- <ul>
+          <li>selected lang: {{selection.language}}</li>
+          <li>selected gender: {{selection.gender}}</li>
+          <li>selected religion: {{selection.religion }}</li>
+        </ul> -->
       </div>
       <div v-if="page === 'Videos'">
         <h1>Videos page</h1>
@@ -100,94 +123,76 @@
         <h1>Quistions page</h1>
       </div>
       <hr />
-      <div v-if="page !== 'language-selection'">
+      <div v-if="page !== 'homePage'">
         <button class="btn btn-primary" @click="homeButton">home</button>
       </div>
     </div>
     <script>
       let DB = {
-        "languages": [
+        languages: [
           {
-            "name": "English",
+            name: "English",
           },
           {
-            "name": "Arabic",
+            name: "Arabic",
           },
           {
-            "name": "Franch",
-          },
-        ],
-        "genders": [
-          {
-            "name": "male",
-          },
-          {
-            "name": "female",
+            name: "Franch",
           },
         ],
-        "religion": [
+        genders: [
           {
-            "name": "muslim",
+            name: "male",
           },
           {
-            "name": "non-muslim",
+            name: "female",
           },
         ],
-        "content": [
+        religion: [
           {
-              "name": "Books",
-              "data": [
-                  {
-                    "name": "Book1",
-                    "description": "This book talks about number 1",
-                    "url": "Link",
-                    "tag": [
-                      "book",
-                      "english",
-                      "female",
-                      "muslim",
-                    ]
-                  },
-                  {
-                    "name": "Book2",
-                    "description": "This book talks about number 2",
-                    "url": "Link",
-                    "tag": [
-                      "book",
-                      "male",
-                      "arabic",
-                      "non-muslim"
-                    ]
-                  }
-              ],
+            name: "muslim",
           },
           {
-              "name": "Videos",
-              "data": [
-                  {
-                    "name": "Video1",
-                    "description": "This book talks about number 1",
-                    "url": "Link",
-                    "tag": [
-                      "male",
-                      "arabic",
-                      "muslim",
-                    ]
-                  },
-                  {
-                    "name": "Video2",
-                    "description": "This book talks about number 2",
-                    "url": "Link",
-                    "tag": [
-                      "male",
-                      "arabic",
-                      "non-muslim"
-                    ]
-                  }
-              ],
+            name: "non-muslim",
           },
-            {  "name":"Quistions"}
-      ]
+        ],
+        content: [
+          {
+            name: "Books",
+            data: [
+              {
+                name: "Book1",
+                description: "This book talks about number 1",
+                url: "Link",
+                tag: ["book", "english", "female", "muslim"],
+              },
+              {
+                name: "Book2",
+                description: "This book talks about number 2",
+                url: "Link",
+                tag: ["book", "male", "arabic", "non-muslim"],
+              },
+            ],
+          },
+          {
+            name: "Videos",
+            data: [
+              {
+                name: "Video1",
+                description: "This book talks about number 1",
+                url: "Link",
+                tag: ["male", "arabic", "muslim"],
+              },
+              {
+                name: "Video2",
+                description: "This book talks about number 2",
+                url: "Link",
+                tag: ["male", "arabic", "non-muslim"],
+              },
+            ],
+          },
+          { name: "Quistions" },
+        ],
       };
     </script>
     <script>
@@ -199,8 +204,9 @@
             dataGender: DB.genders,
             dataReligion: DB.religion,
             dataContent: DB.content,
-            app_name: "Name APP",
-            page: "language-selection",
+            app_name: "جمعية الدعوة بالبدائع",
+            logo: "https://dawabadaya.org.sa/wp-content/uploads/sites/881/2020/06/شعار-دعوة-البدائع-أفقي-300x86.png",
+            page: "homePage",
             selection: {
               language: null,
               gender: null,
@@ -209,28 +215,31 @@
           };
         },
         methods: {
-          homeButton(page){
-            this.changePageTo("language-selection");
+          homeButton(page) {
+            this.changePageTo("homePage");
           },
           changePageTo(page) {
             this.page = page;
+          },
+          goToLanguagePage(e) {
+            this.changePageTo("languagePage");
           },
           fetchLanguage(e) {
             // console.log(e);
             if (e === "English") {
               // console.log("selected english");
               this.selection.language = "english";
-              this.changePageTo("languagePage");
+              this.changePageTo("genderPage");
             }
             if (e === "Arabic") {
               // console.log("selected arabic");
               this.selection.language = "arabic";
-              this.changePageTo("languagePage");
+              this.changePageTo("genderPage");
             }
             if (e === "Franch") {
               // console.log("selected Franch");
               this.selection.language = "Franch";
-              this.changePageTo("languagePage");
+              this.changePageTo("genderPage");
             }
           },
           fetchGender(e) {
@@ -238,12 +247,12 @@
             if (e === "male") {
               console.log("selected male");
               this.selection.gender = "male";
-              this.changePageTo("genderPage");
+              this.changePageTo("religionPage");
             }
             if (e === "female") {
               console.log("selected female");
               this.selection.gender = "female";
-              this.changePageTo("genderPage");
+              this.changePageTo("religionPage");
             }
           },
           fetchReligion(e) {
