@@ -54,3 +54,92 @@
     }
   ]
 }
+
+
+<script>
+let DB = {
+  "languages": [
+    {
+      "name": "English",
+    },
+    {
+      "name": "Arabic",
+    },
+    {
+      "name": "Franch",
+    },
+  ],
+  "genders": [
+    {
+      "name": "male",
+    },
+    {
+      "name": "female",
+    },
+  ],
+  "religion": [
+    {
+      "name": "muslim",
+    },
+    {
+      "name": "non-muslim",
+    },
+  ],
+ "content": {
+      "Books": [
+        {
+          "name": "Book1",
+          "description": "This book talks about number 1",
+          "url": "Link",
+          "tag": [
+            "book",
+            "male",
+            "english",
+            "arabic",
+            "female",
+            "muslim",
+            "non-muslim"
+          ]
+        },
+        {
+          "name": "Book2",
+          "description": "This book talks about number 2",
+          "url": "Link",
+          "tag": [
+            "book",
+            "male",
+            "english",
+            "arabic",
+            "female",
+            "muslim",
+            "non-muslim"
+          ]
+        }
+      ],
+      "Videos": [
+        {
+          "name": "Video1",
+          "description": "Video1",
+          "url": "Link",
+          "tag": [
+            "Video",
+            "english",
+            "female",
+            "non-muslim"
+          ]
+        },
+        {
+          "name": "Video2",
+          "description": "Video2",
+          "url": "Link",
+          "tag": [
+            "Video",
+            "male",
+            "english",
+            "muslim"
+          ]
+        }
+      ]
+    }
+};
+</script>

@@ -73,6 +73,14 @@
           <li>selected gender: {{selection.gender}}</li>
           <li>selected religion: {{selection.religion }}</li>
         </ul>
+        <button
+        v-for="information in dataContent"
+        :key="information.id"
+        class="btn btn-dark mx-1"
+        @click="fetchContent(information.name)"
+      >
+        {{information.name}}
+      </button>
           <!-- <button
           v-for="information in dataReligion"
           :key="information.id"
@@ -82,6 +90,15 @@
           {{information.name}}
         </button> -->
       </div>
+      <div v-if="page === 'Books'">
+        <h1>Books page</h1>
+      </div>
+      <div v-if="page === 'Videos'">
+        <h1>Videos page</h1>
+      </div>
+      <div v-if="page === 'Quistions'">
+        <h1>Quistions page</h1>
+      </div>
       <hr />
       <div v-if="page !== 'language-selection'">
         <button class="btn btn-primary" @click="homeButton">home</button>
@@ -89,30 +106,88 @@
     </div>
     <script>
       let DB = {
-        languages: [
+        "languages": [
           {
-            name: "English",
+            "name": "English",
           },
           {
-            name: "Arabic",
-          },
-        ],
-        genders: [
-          {
-            name: "male",
+            "name": "Arabic",
           },
           {
-            name: "female",
+            "name": "Franch",
           },
         ],
-        religion: [
+        "genders": [
           {
-            name: "muslim",
+            "name": "male",
           },
           {
-            name: "non-muslim",
+            "name": "female",
           },
         ],
+        "religion": [
+          {
+            "name": "muslim",
+          },
+          {
+            "name": "non-muslim",
+          },
+        ],
+        "content": [
+          {
+              "name": "Books",
+              "data": [
+                  {
+                    "name": "Book1",
+                    "description": "This book talks about number 1",
+                    "url": "Link",
+                    "tag": [
+                      "book",
+                      "english",
+                      "female",
+                      "muslim",
+                    ]
+                  },
+                  {
+                    "name": "Book2",
+                    "description": "This book talks about number 2",
+                    "url": "Link",
+                    "tag": [
+                      "book",
+                      "male",
+                      "arabic",
+                      "non-muslim"
+                    ]
+                  }
+              ],
+          },
+          {
+              "name": "Videos",
+              "data": [
+                  {
+                    "name": "Video1",
+                    "description": "This book talks about number 1",
+                    "url": "Link",
+                    "tag": [
+                      "male",
+                      "arabic",
+                      "muslim",
+                    ]
+                  },
+                  {
+                    "name": "Video2",
+                    "description": "This book talks about number 2",
+                    "url": "Link",
+                    "tag": [
+                      "male",
+                      "arabic",
+                      "non-muslim"
+                    ]
+                  }
+              ],
+          },
+            {  "name":"Quistions"}
+      ]
       };
     </script>
     <script>
@@ -123,7 +198,8 @@
             dataLanguages: DB.languages,
             dataGender: DB.genders,
             dataReligion: DB.religion,
-            app_name: "Saleh APP",
+            dataContent: DB.content,
+            app_name: "Name APP",
             page: "language-selection",
             selection: {
               language: null,
@@ -149,6 +225,11 @@
             if (e === "Arabic") {
               // console.log("selected arabic");
               this.selection.language = "arabic";
+              this.changePageTo("languagePage");
+            }
+            if (e === "Franch") {
+              // console.log("selected Franch");
+              this.selection.language = "Franch";
               this.changePageTo("languagePage");
             }
           },
@@ -178,7 +259,16 @@
               this.changePageTo("contentPage");
             }
           },
-          displayContent(){
+          fetchContent(e) {
+            if (e === "Books") {
+              this.changePageTo("Books");
+            }
+            if (e === "Videos") {
+              this.changePageTo("Videos");
+            }
+            if (e === "Quistions") {
+              this.changePageTo("Quistions");
+            }
           },
         },
       });
