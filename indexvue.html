@@ -99,28 +99,19 @@
       <div v-if="page === 'Books'">
         <h1>Books page</h1>
         <button
-          v-for="information in dataContent"
+          v-for="information in BooksContent"
           :key="information.id"
           class="btn btn-dark mx-1"
-          @click="fetchContent(information.name)"
+          @click="fetchBooks(name)"
         >
-          <!-- {{information.name.books}} -->
+          {{information}}
         </button>
-        <ul>
-          <li><a href="" class="btn btn-primary">book1</a></li>
-          <li><a href="" class="btn btn-primary">book2</a></li>
-        </ul>
-        <!-- <ul>
-          <li>selected lang: {{selection.language}}</li>
-          <li>selected gender: {{selection.gender}}</li>
-          <li>selected religion: {{selection.religion }}</li>
-        </ul> -->
       </div>
       <div v-if="page === 'Videos'">
         <h1>Videos page</h1>
       </div>
-      <div v-if="page === 'Quistions'">
-        <h1>Quistions page</h1>
+      <div v-if="page === 'Questions'">
+        <h1>Questions page</h1>
       </div>
       <hr />
       <div v-if="page !== 'homePage'">
@@ -191,7 +182,7 @@
               },
             ],
           },
-          { name: "Quistions" },
+          { name: "Questions" },
         ],
       };
     </script>
@@ -223,6 +214,15 @@
           },
           goToLanguagePage(e) {
             this.changePageTo("languagePage");
+          },
+          jsonQuery(list = [], type) {
+            test = DB["content"];
+            console.log(test);
+
+            newList = DB.filter(function ($item) {
+              return item.data.tag.includes(list);
+            });
+            return newList;
           },
           fetchLanguage(e) {
             // console.log(e);
@@ -271,12 +271,13 @@
           fetchContent(e) {
             if (e === "Books") {
               this.changePageTo("Books");
+              console.log();
             }
             if (e === "Videos") {
               this.changePageTo("Videos");
             }
-            if (e === "Quistions") {
-              this.changePageTo("Quistions");
+            if (e === "Questions") {
+              this.changePageTo("Questions");
             }
           },
         },
