@@ -99,12 +99,12 @@
       <div v-if="page === 'Books'">
         <h1>Books page</h1>
         <button
-          v-for="information in BooksContent"
-          :key="information.id"
+          v-for="data in jsonQuery([selection.language, selection.gender, selection.religion], 'book')"
+          :key="data.name"
           class="btn btn-dark mx-1"
           @click="fetchBooks(name)"
         >
-          {{information}}
+          {{data.name}}
         </button>
       </div>
       <div v-if="page === 'Videos'">
@@ -216,9 +216,14 @@
             this.changePageTo("languagePage");
           },
           jsonQuery(list = [], type) {
+            // Loop to find which ID has .name
+            dataContent["book"];
+            dataContent[0].data;
+
             test = DB["content"];
             console.log(test);
 
+            // Loop to find all the books that contain the tags selected
             newList = DB.filter(function ($item) {
               return item.data.tag.includes(list);
             });
