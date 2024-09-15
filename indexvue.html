@@ -74,11 +74,6 @@
       </div>
       <div v-if="page === 'contentPage'">
         <h1>CONTENT page</h1>
-        <ul>
-          <li>selected lang: {{selection.language}}</li>
-          <li>selected gender: {{selection.gender}}</li>
-          <li>selected religion: {{selection.religion }}</li>
-        </ul>
         <button
           v-for="information in dataContent"
           :key="information.id"
@@ -98,17 +93,38 @@
       </div>
       <div v-if="page === 'Books'">
         <h1>Books page</h1>
-        <button
-          v-for="data in jsonQuery([selection.language, selection.gender, selection.religion], 'book')"
-          :key="data.name"
+        <ul>
+          <li>selected lang: {{selection.language}}</li>
+          <li>selected gender: {{selection.gender}}</li>
+          <li>selected religion: {{selection.religion }}</li>
+          <li>selected type: {{selection.type }}</li>
+        </ul>
+        <div v-if="getFilteringBooks()">
+          <a
+          v-for="information in getFilteringBooks()"
+          :key="information.id"
           class="btn btn-dark mx-1"
-          @click="fetchBooks(name)"
+          :href="information.url"
+          target="_blank"
+          >
+          {{ information.name}}
+        </a>
+        </div>
+        <div v-else>
+          <h5>no books</h5>
+        </div>
+        <!-- <button
+          v-for="data in jsonQuery([selection.language, selection.gender, selection.religion], selection.type )"
+          class="btn btn-dark mx-1"
+          @click=""
         >
-          {{data.name}}
-        </button>
+          {{data.name }}
+        </button> -->
+        
       </div>
       <div v-if="page === 'Videos'">
         <h1>Videos page</h1>
+
       </div>
       <div v-if="page === 'Questions'">
         <h1>Questions page</h1>
@@ -147,44 +163,56 @@
             name: "non-muslim",
           },
         ],
-        content: [
+        mainContent: [
           {
+            id:1,
             name: "Books",
+          },
+          {
+            id:2,
+            name: "Videos",
+          },
+        ],
+      };
+      let books = {
             data: [
               {
-                name: "Book1",
+                id:1,
+                name: "Book english",
                 description: "This book talks about number 1",
-                url: "Link",
+                url: "https://www.google.com",
                 tag: ["book", "english", "female", "muslim"],
               },
               {
-                name: "Book2",
+                id:2,
+                name: "Book arabic female non-muslim",
                 description: "This book talks about number 2",
                 url: "Link",
-                tag: ["book", "male", "arabic", "non-muslim"],
-              },
-            ],
-          },
-          {
-            name: "Videos",
-            data: [
-              {
-                name: "Video1",
-                description: "This book talks about number 1",
-                url: "Link",
-                tag: ["male", "arabic", "muslim"],
+                tag: ["book", "arabic", "female", "non-muslim"],
               },
               {
-                name: "Video2",
+                id:3,
+                name: "Book arabic FEmale non-muslim",
                 description: "This book talks about number 2",
                 url: "Link",
-                tag: ["male", "arabic", "non-muslim"],
+                tag: ["book", "arabic", "FEmale", "non-muslim"],
               },
-            ],
-          },
-          { name: "Questions" },
-        ],
-      };
+              {
+                id:4,
+                name: "Book franch 1",
+                description: "This book talks about number 2",
+                url: "Link",
+                tag: ["book", "Franch", "male", "muslim"],
+              },
+              {
+                id:5,
+                name: "Book franch 1",
+                description: "This book talks about number 2",
+                url: "Link",
+                tag: ["book", "franch", "FEmale", "muslim"],
+              },
+            ]
+      }
     </script>
     <script>
       const { createApp, ref } = Vue;
@@ -194,7 +222,8 @@
             dataLanguages: DB.languages,
             dataGender: DB.genders,
             dataReligion: DB.religion,
-            dataContent: DB.content,
+            dataContent: DB.mainContent,
+            booksContent: books.data,
             app_name: "جمعية الدعوة بالبدائع",
             logo: "https://dawabadaya.org.sa/wp-content/uploads/sites/881/2020/06/شعار-دعوة-البدائع-أفقي-300x86.png",
             page: "homePage",
@@ -202,6 +231,7 @@
               language: null,
               gender: null,
               religion: null,
+              type: null,
             },
           };
         },
@@ -217,17 +247,68 @@
           },
           jsonQuery(list = [], type) {
             // Loop to find which ID has .name
-            dataContent["book"];
-            dataContent[0].data;
+          //  let dataContent = list;
+            // dataContent[type].data;
 
-            test = DB["content"];
-            console.log(test);
+            // console.log(dataContent);
 
             // Loop to find all the books that contain the tags selected
-            newList = DB.filter(function ($item) {
-              return item.data.tag.includes(list);
-            });
-            return newList;
+            // let filteredBooks = dataContent.filter(function ($item) {
+            //   return item.data.tag.includes(list);
+            // // });
+            // return this.dataContent.flatMap(category => {
+            //   return category.data.map(item => {
+            //     return item.tag.includes(this.selection.language) &&
+            //           item.tag.includes(this.selection.gender) &&
+            //           item.tag.includes(this.seletion.religion);
+            //   });
+            // });
+            // return dataContent
+            
+            // console.log(filteredBooks);
+
+          //   newList = DB.filter(function ($item) {
+          //     return item.data.tag.includes(list);
+          //   });
+          //   return newList;
+          },
+          getFilteringBooks(){
+            // return this.books.data
+            // return this.booksContent.filter(x => books.tag.includes(this.selection.language , this.selection.religion , this.selection.gender));
+            console.log ( this.selection.language , this.selection.religion , this.selection.gender)
+            // return books.data
+            // let filteredArr = books.data;
+            // return filteredArr
+
+            // const tagToFind = "english";
+            // const tagsToFind = [ this.selection.language , this.selection.religion , this.selection.gender ];
+            // console.log ( this.selection.language , this.selection.religion , this.selection.gender)
+
+            // const filteredBooks = books.data.filter(book =>
+            //   tagsToFind.every(tag => book.tag.includes(tag))
+            // );
+            const tagsToFind = [this.selection.language , this.selection.religion , this.selection.gender].map(tag => tag.toUpperCase());
+
+            const filteredBooks = books.data.filter(book =>
+              tagsToFind.every(tag => book.tag.map(t => t.toUpperCase()).includes(tag))
+            );
+            // const tagsToFind_ = [this.selection.language , this.selection.religion , this.selection.gender];
+            // const filteredBooks_ = books.data.filter(book =>
+            //   tagsToFind.every(tag => book.tag.includes(tag))
+            // );
+
+            // const filteredBook = books.data.filter(book => book.tag.includes(tagToFind));
+            console.log ( this.selection.language , this.selection.religion , this.selection.gender)
+
+            if (filteredBooks.length){
+
+              return filteredBooks
+            }
+           
+            
+       
+
+            
           },
           fetchLanguage(e) {
             // console.log(e);
@@ -276,13 +357,17 @@
           fetchContent(e) {
             if (e === "Books") {
               this.changePageTo("Books");
-              console.log();
+              this.selection.type = "books";
             }
             if (e === "Videos") {
               this.changePageTo("Videos");
+              this.selection.type = "Videos";
+
             }
             if (e === "Questions") {
               this.changePageTo("Questions");
+              this.selection.type = "Quest";
+
             }
           },
         },
