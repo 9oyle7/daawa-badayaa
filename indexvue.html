@@ -9,129 +9,224 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+      integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
-      rel="stylesheet"
-    />
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
       html,
       body {
         font-family: "Tajawal", sans-serif;
         text-align: center;
+        height: 100%;
+        direction: rtl;
+      }
+      body {
+        /* height: 100%; */
+        font-family: "Tajawal", sans-serif;
+        text-align: center;
+        /* background: linear-gradient(#faf2ddf5, #faf2ddf5),
+          url(https://dawabaday.minasatech.com/wp-content/uploads/sites/881/2020/07/kelk.png); */
+        /* background-color: #c2c2c250; */
+      }
+      .row-bgColor {
+        /* background-color: #888888; */
+        background-color: #f5f5f5;
+      }
+      .btn-primary {
+        color: #1c9ebe;
+        background-color: #e4e4e4;
+        border: 0;
+      }
+      .btn-primary:hover {
+        color: #1c9ebe;
+        background-color: #c9c9c9;
+        border: 0;
+      }
+      .btn-second {
+        background-color: #ffffff;
+        color: #1c9ebe;
+        border: 0;
+        font-weight: 500;
+      }
+      .btn-second:hover {
+        background-color: #ebebeb;
+        color: #1c9ebe;
+        border: 0;
+        font-weight: 500;
+      }
+      .btn-content {
+        background-color: #2f7a85;
+        color: #fff;
+        border: 0;
+        font-weight: 500;
+      }
+      .btn-content:hover {
+        background-color: #235961;
+        color: #fff;
+        border: 0;
+        font-weight: 500;
+      }
+      section {
+        padding: 20px 0;
       }
     </style>
     <title>جمعية الدعوة</title>
   </head>
-  <body>
+  <body class="bg-body-tertiary">
     <div id="app">
-      <div v-if="page === 'homePage'">
-        <img :src="logo" alt="logo" />
-        <h1>{{app_name}}</h1>
-        <button @click="goToLanguagePage" class="btn btn-danger mx-1">
-          اضغط هنا
-        </button>
-      </div>
-      <div v-if="page === 'languagePage'">
-        <h1>choose Language:</h1>
-        <button
-          v-for="information in dataLanguages"
-          :key="information.id"
-          class="btn btn-danger mx-1"
-          @click="fetchLanguage(information.name)"
-        >
-          {{information.name}}
-        </button>
-      </div>
-      <div v-if="page === 'genderPage'">
-        <h1>GENDER page</h1>
-        <!-- <h1>selected lang: {{selection.language}}</h1> -->
-        <button
-          v-for="information in dataGender"
-          :key="information.id"
-          class="btn btn-danger mx-1"
-          @click="fetchGender(information.name)"
-        >
-          {{information.name}}
-        </button>
-      </div>
-      <div v-if="page === 'religionPage'">
-        <h1>RELIAGION page</h1>
-        <!-- <h1>selected gender: {{selection.gender}}</h1> -->
-        <button
+      <div class="container">
+        <img :src="logo" alt="logo" width="200" />
+        <div v-if="page === 'homePage'">
+          <!-- <img :src="logo" alt="logo" /> -->
+          <h5 class="fw-bold mt-3">{{app_name}}</h5>
+          <button
+            @click="goToLanguagePage"
+            class="btn btn-primary fw-bold mx-1 position-absolute bottom-0 start-50 translate-middle-x mb-5"
+          >
+            البداية
+          </button>
+        </div>
+        <div v-if="page === 'languagePage'">
+          <h5 class="fw-bold mt-3">اختر اللغة المناسبة:</h5>
+          <div
+            class="row row-gap-3 row-bgColor py-4 mx-1 justify-content-center"
+          >
+            <button
+              v-for="information in dataLanguages"
+              :key="information.id"
+              class="btn btn-second mx-1 col-3"
+              @click="fetchLanguage(information.name)"
+            >
+              {{information.name}}
+            </button>
+          </div>
+        </div>
+        <div v-if="page === 'genderPage'">
+          <h5 class="fw-bold mt-3">اختر الجنس:</h5>
+          <div
+            class="row row-gab-3 row-bgColor py-4 mx-1 justify-content-center"
+          >
+            <button
+              v-for="information in dataGender"
+              :key="information.id"
+              class="btn btn-second mx-1 col-3"
+              @click="fetchGender(information.name)"
+            >
+              {{information.name}}
+            </button>
+          </div>
+          <!-- <h1>selected lang: {{selection.language}}</h1> -->
+        </div>
+        <div v-if="page === 'religionPage'">
+          <h5 class="fw-bold mt-3">اختر الديانة:</h5>
+          <div
+            class="row row-gab-3 row-bgColor py-4 mx-1 justify-content-center"
+          >
+            <button
+              v-for="information in dataReligion"
+              :key="information.id"
+              class="btn btn-second mx-1 col-3"
+              @click="fetchReligion(information.name)"
+            >
+              {{information.name}}
+            </button>
+          </div>
+          <!-- <h1>selected gender: {{selection.gender}}</h1> -->
+        </div>
+        <div v-if="page === 'contentPage'">
+          <h5 class="fw-bold mt-3">اختر المحتوى المناسبة:</h5>
+          <div
+            class="row row-gab-3 row-bgColor py-4 mx-1 justify-content-center"
+          >
+            <button
+              v-for="information in dataContent"
+              :key="information.id"
+              class="btn btn-outline-secondary mx-1 col-3"
+              @click="fetchContent(information.name)"
+            >
+              {{information.name}}
+            </button>
+          </div>
+
+          <!-- <button
           v-for="information in dataReligion"
           :key="information.id"
-          class="btn btn-danger mx-1"
-          @click="fetchReligion(information.name)"
-        >
-          {{information.name}}
-        </button>
-      </div>
-      <div v-if="page === 'contentPage'">
-        <h1>CONTENT page</h1>
-        <button
-          v-for="information in dataContent"
-          :key="information.id"
-          class="btn btn-dark mx-1"
-          @click="fetchContent(information.name)"
-        >
-          {{information.name}}
-        </button>
-        <!-- <button
-          v-for="information in dataReligion"
-          :key="information.id"
-          class="btn btn-danger mx-1"
+          class="btn btn-primary mx-1"
           @click="fetchGender(information.name)"
         >
           {{information.name}}
         </button> -->
-      </div>
-      <div v-if="page === 'Books'">
-        <h1>Books page</h1>
-        <ul>
+        </div>
+        <div v-if="page === 'Books'">
+          <h5 class="fw-bold mt-3">محتويات الكتب</h5>
+          <div
+            class="row row-gab-3 row-bgColor py-4 mx-1 justify-content-center"
+          >
+            <div v-if="getFilteringBooks()">
+              <a
+                v-for="information in getFilteringBooks()"
+                :key="information.id"
+                class="btn btn-content mx-1 col-3"
+                :href="information.url"
+                target="_blank"
+              >
+                {{ information.name}}
+              </a>
+            </div>
+            <div v-else>
+              <h5>لا يوجد كتب</h5>
+            </div>
+          </div>
+          <!-- <ul>
           <li>selected lang: {{selection.language}}</li>
           <li>selected gender: {{selection.gender}}</li>
           <li>selected religion: {{selection.religion }}</li>
           <li>selected type: {{selection.type }}</li>
-        </ul>
-        <div v-if="getFilteringBooks()">
-          <a
-          v-for="information in getFilteringBooks()"
-          :key="information.id"
-          class="btn btn-dark mx-1"
-          :href="information.url"
-          target="_blank"
-          >
-          {{ information.name}}
-        </a>
-        </div>
-        <div v-else>
-          <h5>no books</h5>
-        </div>
-        <!-- <button
+        </ul> -->
+
+          <!-- <button
           v-for="data in jsonQuery([selection.language, selection.gender, selection.religion], selection.type )"
           class="btn btn-dark mx-1"
           @click=""
         >
           {{data.name }}
         </button> -->
-        
-      </div>
-      <div v-if="page === 'Videos'">
-        <h1>Videos page</h1>
-
-      </div>
-      <div v-if="page === 'Questions'">
-        <h1>Questions page</h1>
-      </div>
-      <hr />
-      <div v-if="page !== 'homePage'">
-        <button class="btn btn-primary" @click="homeButton">home</button>
+        </div>
+        <div v-if="page === 'Videos'">
+          <h5 class="fw-bold mt-3">المحتوى المرئي</h5>
+          <div
+            class="row row-gab-3 row-bgColor py-4 mx-1 justify-content-center"
+          ></div>
+        </div>
+        <div v-if="page === 'Questions'">
+          <h5 class="fw-bold mt-3">محتوى الأسئلة</h5>
+          <div
+            class="row row-gab-3 row-bgColor py-4 mx-1 justify-content-center"
+          ></div>
+        </div>
+        <!-- <hr /> -->
+        <div v-if="page !== 'homePage'">
+          <button
+            class="btn btn-primary fw-bold mx-1 position-absolute bottom-0 start-50 translate-middle-x mb-5"
+            @click="homeButton"
+          >
+            <i class="bi bi-house-fill"></i>
+          </button>
+        </div>
       </div>
     </div>
     <script>
@@ -145,6 +240,12 @@
           },
           {
             name: "Franch",
+          },
+          {
+            name: "Espain",
+          },
+          {
+            name: "Ksa",
           },
         ],
         genders: [
@@ -165,54 +266,54 @@
         ],
         mainContent: [
           {
-            id:1,
+            id: 1,
             name: "Books",
           },
           {
-            id:2,
+            id: 2,
             name: "Videos",
           },
         ],
       };
       let books = {
-            data: [
-              {
-                id:1,
-                name: "Book english",
-                description: "This book talks about number 1",
-                url: "https://www.google.com",
-                tag: ["book", "english", "female", "muslim"],
-              },
-              {
-                id:2,
-                name: "Book arabic female non-muslim",
-                description: "This book talks about number 2",
-                url: "Link",
-                tag: ["book", "arabic", "female", "non-muslim"],
-              },
-              {
-                id:3,
-                name: "Book arabic FEmale non-muslim",
-                description: "This book talks about number 2",
-                url: "Link",
-                tag: ["book", "arabic", "FEmale", "non-muslim"],
-              },
-              {
-                id:4,
-                name: "Book franch 1",
-                description: "This book talks about number 2",
-                url: "Link",
-                tag: ["book", "Franch", "male", "muslim"],
-              },
-              {
-                id:5,
-                name: "Book franch 1",
-                description: "This book talks about number 2",
-                url: "Link",
-                tag: ["book", "franch", "FEmale", "muslim"],
-              },
-            ]
-      }
+        data: [
+          {
+            id: 1,
+            name: "Book english",
+            description: "This book talks about number 1",
+            url: "https://www.google.com",
+            tag: ["book", "english", "female", "muslim"],
+          },
+          {
+            id: 2,
+            name: "Book arabic female non-muslim",
+            description: "This book talks about number 2",
+            url: "Link",
+            tag: ["book", "arabic", "female", "non-muslim"],
+          },
+          {
+            id: 3,
+            name: "Book arabic FEmale non-muslim",
+            description: "This book talks about number 2",
+            url: "Link",
+            tag: ["book", "arabic", "FEmale", "non-muslim"],
+          },
+          {
+            id: 4,
+            name: "Book franch 1",
+            description: "This book talks about number 2",
+            url: "https://www.google.com",
+            tag: ["book", "Franch", "male", "muslim"],
+          },
+          {
+            id: 5,
+            name: "Book franch 1",
+            description: "This book talks about number 2",
+            url: "https://www.google.com",
+            tag: ["book", "franch", "FEmale", "muslim"],
+          },
+        ],
+      };
     </script>
     <script>
       const { createApp, ref } = Vue;
@@ -247,11 +348,9 @@
           },
           jsonQuery(list = [], type) {
             // Loop to find which ID has .name
-          //  let dataContent = list;
+            //  let dataContent = list;
             // dataContent[type].data;
-
             // console.log(dataContent);
-
             // Loop to find all the books that contain the tags selected
             // let filteredBooks = dataContent.filter(function ($item) {
             //   return item.data.tag.includes(list);
@@ -264,18 +363,20 @@
             //   });
             // });
             // return dataContent
-            
             // console.log(filteredBooks);
-
-          //   newList = DB.filter(function ($item) {
-          //     return item.data.tag.includes(list);
-          //   });
-          //   return newList;
+            //   newList = DB.filter(function ($item) {
+            //     return item.data.tag.includes(list);
+            //   });
+            //   return newList;
           },
-          getFilteringBooks(){
+          getFilteringBooks() {
             // return this.books.data
             // return this.booksContent.filter(x => books.tag.includes(this.selection.language , this.selection.religion , this.selection.gender));
-            console.log ( this.selection.language , this.selection.religion , this.selection.gender)
+            console.log(
+              this.selection.language,
+              this.selection.religion,
+              this.selection.gender
+            );
             // return books.data
             // let filteredArr = books.data;
             // return filteredArr
@@ -287,10 +388,16 @@
             // const filteredBooks = books.data.filter(book =>
             //   tagsToFind.every(tag => book.tag.includes(tag))
             // );
-            const tagsToFind = [this.selection.language , this.selection.religion , this.selection.gender].map(tag => tag.toUpperCase());
+            const tagsToFind = [
+              this.selection.language,
+              this.selection.religion,
+              this.selection.gender,
+            ].map((tag) => tag.toUpperCase());
 
-            const filteredBooks = books.data.filter(book =>
-              tagsToFind.every(tag => book.tag.map(t => t.toUpperCase()).includes(tag))
+            const filteredBooks = books.data.filter((book) =>
+              tagsToFind.every((tag) =>
+                book.tag.map((t) => t.toUpperCase()).includes(tag)
+              )
             );
             // const tagsToFind_ = [this.selection.language , this.selection.religion , this.selection.gender];
             // const filteredBooks_ = books.data.filter(book =>
@@ -298,17 +405,15 @@
             // );
 
             // const filteredBook = books.data.filter(book => book.tag.includes(tagToFind));
-            console.log ( this.selection.language , this.selection.religion , this.selection.gender)
+            console.log(
+              this.selection.language,
+              this.selection.religion,
+              this.selection.gender
+            );
 
-            if (filteredBooks.length){
-
-              return filteredBooks
+            if (filteredBooks.length) {
+              return filteredBooks;
             }
-           
-            
-       
-
-            
           },
           fetchLanguage(e) {
             // console.log(e);
@@ -362,12 +467,10 @@
             if (e === "Videos") {
               this.changePageTo("Videos");
               this.selection.type = "Videos";
-
             }
             if (e === "Questions") {
               this.changePageTo("Questions");
               this.selection.type = "Quest";
-
             }
           },
         },
